@@ -4,12 +4,25 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"runtime/debug"
 
 	"github.com/nori-kamiya/go-clc/internal/rate"
 )
 
 // version is overridable at build time: -ldflags "-X main.version=1.0.0".
+// When unset (e.g. installed via `go install …@v0.0.1`), it falls back to the
+// module version recorded in the build info.
 var version = "dev"
+
+func resolveVersion() string {
+	if version != "dev" {
+		return version
+	}
+	if info, ok := debug.ReadBuildInfo(); ok && info.Main.Version != "" && info.Main.Version != "(devel)" {
+		return info.Main.Version
+	}
+	return version
+}
 
 const usage = `go-clc - Claude Code レート残量ビューア
 
@@ -37,7 +50,7 @@ func run(args []string) int {
 	case "rate":
 		return cmdRate(args[1:])
 	case "version", "--version", "-v":
-		fmt.Printf("go-clc %s\n", version)
+		fmt.Printf("go-clc %s\n", resolveVersion())
 		return 0
 	case "help", "--help", "-h":
 		fmt.Print(usage)
