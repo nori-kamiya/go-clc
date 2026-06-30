@@ -1,0 +1,23 @@
+{
+  "bar_width": 13,
+  "label_width": 7,
+  "monthly_limit_usd": 10.0,
+  "color_warn_threshold": 50,
+  "color_danger_threshold": 80,
+  "window_labels": {
+    "five_hour": "5Hours",
+    "seven_day": "Weekly",
+    "seven_day_opus": "Weekly(Opus)",
+    "seven_day_sonnet": "Weekly(Sonnet)",
+    "seven_day_oauth_apps": "Weekly(OAuth Apps)",
+    "extra_usage": "Extra"
+  },
+  "window_order": [
+    "five_hour",
+    "seven_day",
+    "seven_day_opus",
+    "seven_day_sonnet",
+    "seven_day_oauth_apps",
+    "extra_usage"
+  ]
+}
